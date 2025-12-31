@@ -1,0 +1,14 @@
+# .gitignore
+__pycache__/
+*.pyc
+.DS_Store
+results/
+jobs/
+logs/
+data/*
+!data/raw_sample/
+!data/sample_output/
+!data/segments/
+!data/training_set/
+*.gwf
+*.ffl

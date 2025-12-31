@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE LIGO_LW SYSTEM "http://ldas-sw.ligo.caltech.edu/doc/ligolwAPI/html/ligolw_dtd.txt">
+<LIGO_LW>
+        <Table Name="process:table">
+                <Column Type="lstring" Name="comment"/>
+                <Column Type="lstring" Name="node"/>
+                <Column Type="lstring" Name="domain"/>
+                <Column Type="int_4s" Name="unix_procid"/>
+                <Column Type="int_4s" Name="start_time"/>
+                <Column Type="int_8s" Name="process_id"/>
+                <Column Type="int_4s" Name="is_online"/>
+                <Column Type="lstring" Name="ifos"/>
+                <Column Type="int_4s" Name="jobid"/>
+                <Column Type="lstring" Name="username"/>
+                <Column Type="lstring" Name="program"/>
+                <Column Type="int_4s" Name="end_time"/>
+                <Column Type="lstring" Name="version"/>
+                <Column Type="lstring" Name="cvs_repository"/>
+                <Column Type="int_4s" Name="cvs_entry_time"/>
+                <Stream Delimiter="," Type="Local" Name="process:table">
+                        ,,,,,0,,"K1",,"unknown","OMICRON",,"3.2.0",,
+                </Stream>
+        </Table>
+        <Table Name="process_params:table">
+                <Column Type="int_8s" Name="process:process_id"/>
+                <Column Type="lstring" Name="program"/>
+                <Column Type="lstring" Name="type"/>
+                <Column Type="lstring" Name="value"/>
+                <Column Type="lstring" Name="param"/>
+                <Stream Delimiter="," Type="Local" Name="process_params:table">
+                        0,"OMICRON","lstring","omicron_DATA_FFLFILE","/data/kagra/home/kihyun.jung/O4a/Omicron/2023-06-18-gwf.ffl",
+                        0,"OMICRON","lstring","omicron_DATA_CHANNEL","K1:CAL-CS_PROC_DARM_STRAIN_DBL_DQ",
+                        0,"OMICRON","int_8u","omicron_DATA_SAMPLEFREQUENCY","8192",
+                        0,"OMICRON","lstring","omicron_INJECTION_FFL","none",
+                        0,"OMICRON","lstring","omicron_INJECTION_CHANNEL","none",
+                        0,"OMICRON","real_8","omicron_INJECTION_FACTOR","0",
+                        0,"OMICRON","lstring","omicron_INJECTION_FILENAME","none",
+                        0,"OMICRON","int_8u","omicron_INJECTION_SG","0",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGTIMEMIN","0",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGTIMEMAX","0",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGFREQUENCYMIN","32",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGFREQUENCYMAX","512",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGQMIN","4",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGQMAX","100",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGAMPMIN","1e-21",
+                        0,"OMICRON","real_8","omicron_INJECTION_SGAMPMAX","1e-21",
+                        0,"OMICRON","real_8","omicron_PARAMETER_FMIN","10",
+                        0,"OMICRON","real_8","omicron_PARAMETER_FMAX","3951.2",
+                        0,"OMICRON","real_8","omicron_PARAMETER_QMIN","5.6569",
+                        0,"OMICRON","real_8","omicron_PARAMETER_QMAX","90.51",
+                        0,"OMICRON","int_8u","omicron_PARAMETER_CHUNKDURATION","64",
+                        0,"OMICRON","int_8u","omicron_PARAMETER_OVERLAPDURATION","4",
+                        0,"OMICRON","real_8","omicron_PARAMETER_MISMATCHMAX","0.2",
+                        0,"OMICRON","real_8","omicron_PARAMETER_SNRTHRESHOLD","6",
+                        0,"OMICRON","int_8u","omicron_PARAMETER_PSDLENGTH","128",
+                        0,"OMICRON","real_8","omicron_PARAMETER_HIGHPASS","8",
+                        0,"OMICRON","lstring","omicron_PARAMETER_CLUSTERING","TIME",
+                        0,"OMICRON","real_8","omicron_PARAMETER_CLUSTERDT","0.1",
+                        0,"OMICRON","lstring","omicron_PARAMETER_FFTPLAN","FFTW_MEASURE",
+                        0,"OMICRON","real_8","omicron_PARAMETER_TRIGGERRATEMAX","10000",
+                        0,"OMICRON","int_8u","omicron_PARAMETER_TRIGGERBUFFERSIZE","0",
+                        0,"OMICRON","lstring","omicron_OUTPUT_DIRECTORY","/data/kagra/home/kihyun.jung/O4a/Omicron/K1/SCI/2023-06-18",
+                        0,"OMICRON","int_8u","omicron_OUTPUT_VERBOSITY","0",
+                        0,"OMICRON","lstring","omicron_OUTPUT_FORMAT","xml",
+                        0,"OMICRON","int_8u","omicron_OUTPUT_PLOTWIDTH","0",
+                        0,"OMICRON","int_8u","omicron_OUTPUT_PLOTHEIGHT","0",
+                        0,"OMICRON","lstring","omicron_OUTPUT_PRODUCTS","GWOLLUM",
+                        0,"OMICRON","lstring","omicron_OUTPUT_STYLE",""
+                </Stream>
+        </Table>
+        <Table Name="sngl_burst:table">
+                <Column Type="lstring" Name="ifo"/>
+                <Column Type="int_4s" Name="peak_time"/>
+                <Column Type="int_4s" Name="peak_time_ns"/>
+                <Column Type="int_4s" Name="start_time"/>
+                <Column Type="int_4s" Name="start_time_ns"/>
+                <Column Type="real_4" Name="duration"/>
+                <Column Type="lstring" Name="search"/>
+                <Column Type="int_8s" Name="process:process_id"/>
+                <Column Type="int_8s" Name="event_id"/>
+                <Column Type="real_4" Name="peak_frequency"/>
+                <Column Type="real_4" Name="central_freq"/>
+                <Column Type="real_4" Name="bandwidth"/>
+                <Column Type="lstring" Name="channel"/>
+                <Column Type="real_4" Name="amplitude"/>
+                <Column Type="real_4" Name="snr"/>
+                <Column Type="real_4" Name="confidence"/>
+                <Column Type="real_8" Name="chisq"/>
+                <Column Type="real_8" Name="chisq_dof"/>
+                <Column Type="lstring" Name="param_one_name"/>
+                <Column Type="real_8" Name="param_one_value"/>
+                <Stream Name="sngl_burst:table" Type="Local" Delimiter=",">
+                        "K1",1371097728,104248046,1371097728,103027105,0.00195,"OMICRON",0,0,590.60003,610.72681,310.99087,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.87505e-21,7.19914,0,0,0,"phase",1.49422,
+                        "K1",1371097728,584716081,1371097728,582031011,0.00391,"OMICRON",0,1,702.53450,915.58804,748.15635,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.42079e-21,8.54960,0,0,0,"phase",1.10615,
+                        "K1",1371097729,300415039,1371097729,300292968,0.00024,"OMICRON",0,2,994.06787,997.81308,172.74255,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.20247e-21,6.02227,0,0,0,"phase",1.09924,
+                        "K1",1371097730,475341081,1371097730,475096940,0.00098,"OMICRON",0,3,590.60003,653.86605,224.71237,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.62580e-21,6.24217,0,0,0,"phase",-3.06181,
+                        "K1",1371097730,740478038,1371097730,739257097,0.00293,"OMICRON",0,4,702.53450,994.66188,1078.86101,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.36293e-21,8.34525,0,0,0,"phase",-1.37197,
+                        "K1",1371097730,982177019,1371097730,981445074,0.00147,"OMICRON",0,5,590.60003,610.72681,310.99087,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.78772e-21,6.86384,0,0,0,"phase",-1.97572,
+                        "K1",1371097731,460692882,1371097731,459471940,0.00147,"OMICRON",0,6,702.53450,683.33659,456.21043,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.85275e-21,6.54343,0,0,0,"phase",-0.25934,
+                        "K1",1371097732,419677019,1371097732,391356945,0.02954,"OMICRON",0,7,702.53450,994.66188,1078.86101,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.24818e-21,7.94001,0,0,0,"phase",-1.34597,
+                        "K1",1371097733,139892101,1371097733,139159917,0.00147,"OMICRON",0,8,835.68354,872.44879,834.43485,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.18915e-21,6.90197,0,0,0,"phase",2.15792,
+                        "K1",1371097734,577392101,1371097734,575195074,0.00391,"OMICRON",0,9,496.50003,543.97325,444.49799,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.13269e-21,8.10700,0,0,0,"phase",2.71221,
+                        "K1",1371097734,789305925,1371097734,788573980,0.00147,"OMICRON",0,10,702.53450,726.47583,369.93194,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.94166e-21,6.85744,0,0,0,"phase",0.43016,
+                        "K1",1371097735,267333984,1371097735,266113042,0.00195,"OMICRON",0,11,702.53450,726.47583,369.93194,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.14535e-21,7.57683,0,0,0,"phase",0.42510,
+                        "K1",1371097735,535887956,1371097735,535644054,0.00049,"OMICRON",0,12,835.68354,777.79112,267.30137,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.13093e-21,6.71844,0,0,0,"phase",1.50101,
+                        "K1",1371097736,13427019,1371097736,12695074,0.00147,"OMICRON",0,13,702.53450,915.58804,748.15635,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.16319e-21,7.63981,0,0,0,"phase",2.03265,
+                        "K1",1371097736,702636003,1371097736,695312023,0.03906,"OMICRON",0,14,294.98281,305.03538,155.32840,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.29830e-21,7.39356,0,0,0,"phase",0.41259,
+                        "K1",1371097736,976196050,1371097736,944823980,0.03272,"OMICRON",0,15,994.06787,872.44879,834.43485,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.91210e-21,7.96264,0,0,0,"phase",0.30966,
+                        "K1",1371097737,863646984,1371097737,863524913,0.00025,"OMICRON",0,16,1406.57994,1411.87930,244.42617,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",3.45715e-21,6.07499,0,0,0,"phase",3.10283,
+                        "K1",1371097740,253906011,1371097740,171875000,0.21875,"OMICRON",0,17,353.18084,367.02831,65.86567,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",4.44506e-21,9.27767,0,0,0,"phase",2.04932,
+                        "K1",1371097747,289062023,1371097747,281250000,0.01562,"OMICRON",0,18,363.50576,363.51165,4.13997,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",8.67905e-21,6.35461,0,0,0,"phase",-2.93985,
+                        "K1",1371097751,358154058,1371097751,356445074,0.00244,"OMICRON",0,19,702.53450,647.07069,528.74222,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.03844e-21,7.19924,0,0,0,"phase",1.47745,
+                        "K1",1371097751,839720964,1371097751,828125000,0.01196,"OMICRON",0,20,994.06787,582.22135,1003.92599,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.23446e-21,6.10974,0,0,0,"phase",-2.66178,
+                        "K1",1371097752,78979015,1371097752,78613042,0.00098,"OMICRON",0,21,994.06787,1150.15731,767.87014,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.60416e-21,7.12063,0,0,0,"phase",-1.34111,
+                        "K1",1371097752,315673112,1371097752,314940929,0.00122,"OMICRON",0,22,835.68354,872.44879,834.43485,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.24094e-21,7.06525,0,0,0,"phase",-0.96419,
+                        "K1",1371097753,754149913,1371097753,753417968,0.00098,"OMICRON",0,23,702.53450,705.18134,122.08180,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.78735e-21,6.31245,0,0,0,"phase",-0.77438,
+                        "K1",1371097754,715575933,1371097754,712889909,0.00391,"OMICRON",0,24,496.50003,702.95430,762.46010,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.09297e-21,7.95603,0,0,0,"phase",-2.76583,
+                        "K1",1371097755,674194097,1371097755,673827886,0.00073,"OMICRON",0,25,1406.57994,1368.14282,913.40203,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",4.24057e-21,7.45163,0,0,0,"phase",-0.57867,
+                        "K1",1371097755,914671897,1371097755,914550065,0.00049,"OMICRON",0,26,994.06787,915.58804,748.15635,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.35007e-21,6.42586,0,0,0,"phase",-0.19621,
+                        "K1",1371097756,395751953,1371097756,394531011,0.00195,"OMICRON",0,27,835.68354,966.90333,645.52578,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.55976e-21,8.07043,0,0,0,"phase",0.31527,
+                        "K1",1371097757,95092058,1371097757,94969987,0.00025,"OMICRON",0,28,994.06787,997.81308,172.74255,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.20579e-21,6.03136,0,0,0,"phase",-0.65433,
+                        "K1",1371097757,352782964,1371097757,351562023,0.00195,"OMICRON",0,29,835.68354,872.44879,834.43485,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.73970e-21,8.63775,0,0,0,"phase",1.66265,
+                        "K1",1371097757,831908941,1371097757,831542968,0.00147,"OMICRON",0,30,994.06787,1150.15731,767.87014,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.71875e-21,7.43395,0,0,0,"phase",-0.62544,
+                        "K1",1371097758,550537109,1371097758,550292968,0.00098,"OMICRON",0,31,496.50003,498.37062,86.27849,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.61463e-21,6.13772,0,0,0,"phase",-1.62963,
+                        "K1",1371097758,790771007,1371097758,790039062,0.00195,"OMICRON",0,32,702.53450,994.66188,1078.86101,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.20828e-21,7.79907,0,0,0,"phase",2.53101,
+                        "K1",1371097760,468504905,1371097760,467772960,0.00147,"OMICRON",0,33,590.60003,769.70786,628.95298,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.69298e-21,6.50010,0,0,0,"phase",-0.04662,
+                        "K1",1371097760,946044921,1371097760,945800065,0.00049,"OMICRON",0,34,590.60003,592.82515,102.63057,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.63219e-21,6.26669,0,0,0,"phase",0.49177,
+                        "K1",1371097761,429930925,1371097761,429442882,0.00073,"OMICRON",0,35,835.68354,925.20329,317.96211,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.02575e-21,6.38680,0,0,0,"phase",1.32343,
+                        "K1",1371097761,667236089,1371097761,666503906,0.00098,"OMICRON",0,36,702.53450,726.47583,369.93194,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.82420e-21,6.44262,0,0,0,"phase",-1.92955,
+                        "K1",1371097761,908935070,1371097761,833983898,0.07617,"OMICRON",0,37,835.68354,2013.80422,3117.14570,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.92394e-21,9.21862,0,0,0,"phase",-0.63417,
+                        "K1",1371097762,626708984,1371097762,625000000,0.00293,"OMICRON",0,38,496.50003,733.44197,701.48476,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.99141e-21,7.56995,0,0,0,"phase",-1.70171,
+                        "K1",1371097763,584594011,1371097763,584471940,0.00025,"OMICRON",0,39,994.06787,997.81308,172.74255,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.21617e-21,6.05974,0,0,0,"phase",-2.70857,
+                        "K1",1371097764,303955078,1371097764,302733898,0.00195,"OMICRON",0,40,702.53450,726.47583,369.93194,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.00950e-21,7.09703,0,0,0,"phase",0.89297,
+                        "K1",1371097765,265502929,1371097765,265136003,0.00098,"OMICRON",0,41,994.06787,925.20329,317.96211,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.35730e-21,6.44562,0,0,0,"phase",-1.53620,
+                        "K1",1371097765,504271984,1371097765,504149913,0.00049,"OMICRON",0,42,994.06787,1100.55401,378.22441,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.33659e-21,6.38900,0,0,0,"phase",0.86889,
+                        "K1",1371097767,352416992,1371097767,352294921,0.00024,"OMICRON",0,43,994.06787,997.81308,172.74255,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.21443e-21,6.05497,0,0,0,"phase",-2.91621,
+                        "K1",1371097770,59448003,1371097770,58593034,0.00195,"OMICRON",0,44,994.06787,966.90333,645.52578,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.85868e-21,7.81657,0,0,0,"phase",0.00552,
+                        "K1",1371097770,296142101,1371097770,295409917,0.00147,"OMICRON",0,45,835.68354,1037.80112,992.58252,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.28281e-21,7.19729,0,0,0,"phase",-1.50377,
+                        "K1",1371097770,538817882,1371097770,537596940,0.00147,"OMICRON",0,46,702.53450,915.58804,748.15635,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.02181e-21,7.14050,0,0,0,"phase",1.19718,
+                        "K1",1371097772,455199956,1371097772,454588890,0.00147,"OMICRON",0,47,1406.57994,1103.77171,1442.14425,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",4.29940e-21,7.55501,0,0,0,"phase",1.05562,
+                        "K1",1371097773,243164062,1371097773,240233898,0.00391,"OMICRON",0,48,3505.86958,3566.16751,160.41054,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",3.90394e-20,6.49224,0,0,0,"phase",-2.17199,
+                        "K1",1371097775,310791015,1371097775,310547113,0.00049,"OMICRON",0,49,835.68354,838.83202,145.21956,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.97001e-21,6.21107,0,0,0,"phase",1.00787,
+                        "K1",1371097776,52001953,1371097776,51269054,0.00147,"OMICRON",0,50,702.53450,726.47583,369.93194,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.07046e-21,7.31233,0,0,0,"phase",-0.45477,
+                        "K1",1371097776,771728038,1371097776,770996093,0.00098,"OMICRON",0,51,702.53450,1356.10515,1629.19057,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.04189e-21,7.21141,0,0,0,"phase",1.91544,
+                        "K1",1371097777,10986089,1371097777,10253906,0.00244,"OMICRON",0,52,702.53450,872.44879,834.43485,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.23041e-21,7.87724,0,0,0,"phase",0.34184,
+                        "K1",1371097777,226927995,1371097777,226562023,0.00073,"OMICRON",0,53,994.06787,925.20329,317.96211,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.43947e-21,6.67031,0,0,0,"phase",0.19693,
+                        "K1",1371097777,575804948,1371097777,575438976,0.00049,"OMICRON",0,54,2767.58078,2906.64822,521.61735,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",1.72993e-20,6.23393,0,0,0,"phase",-2.78933,
+                        "K1",1371097778,297118902,1371097778,296875000,0.00049,"OMICRON",0,55,2914.64519,2915.39018,131.80703,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.11503e-20,6.09664,0,0,0,"phase",-1.62317,
+                        "K1",1371097778,406738042,1371097778,406250000,0.00098,"OMICRON",0,56,3523.90371,3524.13221,80.26106,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",3.64021e-20,6.02924,0,0,0,"phase",1.68949,
+                        "K1",1371097779,225585937,1371097779,224608898,0.00781,"OMICRON",0,57,3164.31987,3146.55601,71.66877,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.93708e-20,6.35998,0,0,0,"phase",0.69132,
+                        "K1",1371097779,699707031,1371097779,699218034,0.00098,"OMICRON",0,58,3688.13444,3688.37359,84.00161,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",4.13326e-20,6.30032,0,0,0,"phase",1.02162,
+                        "K1",1371097781,258177995,1371097781,257812023,0.00049,"OMICRON",0,59,1182.47027,1100.55401,378.22441,"CAL-CS_PROC_DARM_STRAIN_DBL_DQ",2.80262e-21,6.33477,0,0,0,"phase",-2.54390
+                </Stream>
+        </Table>
+        <Table Name="segment_definer:table">
+                <Column Type="int_8s" Name="process:process_id"/>
+                <Column Type="int_8s" Name="segment_def_id"/>
+                <Column Type="lstring" Name="ifos"/>
+                <Column Type="lstring" Name="name"/>
+                <Column Type="lstring" Name="comment"/>
+                <Stream Delimiter="," Type="Local" Name="segment_definer:table">
+                        0,0,"K1","OMICRON-segments","OMICRON processed segments"
+                </Stream>
+        </Table>
+        <Table Name="segment_summary:table">
+                <Column Type="int_8s" Name="process:process_id"/>
+                <Column Type="int_4s" Name="start_time"/>
+                <Column Type="int_4s" Name="start_time_ns"/>
+                <Column Type="int_4s" Name="end_time"/>
+                <Column Type="int_4s" Name="end_time_ns"/>
+                <Column Type="int_8s" Name="segment_definer:segment_def_id"/>
+                <Column Type="lstring" Name="comment"/>
+                <Stream Delimiter="," Type="Local" Name="segment_summary:table">
+                        0,1371097728,0,1371097788,0,0,"OMICRON processed time interval"
+                </Stream>
+        </Table>
+        <Table Name="segment:table">
+                <Column Type="int_8s" Name="process:process_id"/>
+                <Column Type="int_8s" Name="segment_id"/>
+                <Column Type="int_4s" Name="start_time"/>
+                <Column Type="int_4s" Name="start_time_ns"/>
+                <Column Type="int_4s" Name="end_time"/>
+                <Column Type="int_4s" Name="end_time_ns"/>
+                <Column Type="int_8s" Name="segment_definer:segment_def_id"/>
+                <Stream Name="segment:table" Type="Local" Delimiter=",">
+                        0,0,1371097728,0,1371097788,0,0
+                </Stream>
+        </Table>
+</LIGO_LW>
+~                  

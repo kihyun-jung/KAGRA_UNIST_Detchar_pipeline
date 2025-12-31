@@ -1,0 +1,65 @@
+//*************************************************************************************
+//************************ Omicron configuration file   *****************************
+//*************************************************************************************
+
+//************************************************************************************
+//************************ PARAMETER CLASS        *****************************
+//************************************************************************************
+
+//** chunk duration and overlap in seconds
+//PARAMETER     CHUNKDURATION 304
+//PARAMETER     SEGMENTDURATION 64
+//PARAMETER     OVERLAPDURATION 4
+PARAMETER TIMING 64 4
+
+//** high pass filter
+PARAMETER HIGHPASS 8
+
+//** search frequency range
+PARAMETER FREQUENCYRANGE 10 4096
+
+//** search Q range
+PARAMETER QRANGE 4 128
+
+//** maximal mismatch between tiles
+PARAMETER MISMATCHMAX 0.2
+
+//** tile SNR threshold
+PARAMETER SNRTHRESHOLD 6
+
+//** data length for optimal PSD estimation in seconds
+PARAMETER PSDLENGTH 128
+
+//** cluster option
+PARAMETER CLUSTERING TIME
+PARAMETER CLUSTERDT 0.1
+
+//*************************************************************************************
+//************************ OUTPUT CLASS         *****************************
+//*************************************************************************************
+
+//** path to output directory (Dynamic Path)
+OUTPUT DIRECTORY {OUTPUT_DIRECTORY}
+
+//** list of data products: triggers maps
+OUTPUT PRODUCTS triggers
+
+//** output file format: xml
+OUTPUT FORMAT xml
+
+//** verbosity level (0-1-2-3)
+OUTPUT VERBOSITY 0
+
+//*************************************************************************************
+//************************ DATA CLASS           *****************************
+//*************************************************************************************
+
+//** path to a frame file list file (Dynamic Path)
+DATA FFL {DATA_FFL}
+
+//** working sampling frequency (one value for all channels)
+DATA SAMPLEFREQUENCY 8192
+PARAMETER TRIGGERRATEMAX 10000
+
+//** list of channels you want to process
+DATA CHANNELS K1:CAL-CS_PROC_DARM_STRAIN_DBL_DQ
