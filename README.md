@@ -143,7 +143,7 @@ python run_ml_pipeline.py --framework tensorflow
 | Step 1. Signal Detection | Step 2. Root Cause Analysis | Step 3. Visualization & Classification |
 | :---: | :---: | :---: |
 | **Omicron ETL** | **Hveto Analysis** | **Final Output (Q-scan & AI)** |
-| 📄 **XML/CSV Logs Generated**<br>*(SNR > 5 Triggers Extracted)* | ⚙️ **Veto Segments Identified**<br>*(Noise Correlation Logs)* | ![Q-scan Result](https://via.placeholder.com/300x200.png?text=Q-Spectrogram+Image%0AClass:+Scattering) |
+| 📄 **XML/CSV Logs Generated**<br>*(SNR > 8 Triggers Extracted)* | ⚙️ **Veto Segments Identified**<br>*(Noise Correlation Logs)* | **Example of Q-spectrogram**<br><img width="350" height="400" alt="Main-DAC-STRAIN_C20-1270316463 693-0 5" src="https://github.com/user-attachments/assets/297d2f5a-a140-4ff9-bef1-b003048fb7ce" /> |
 | *Data Ingestion & Filtering* | *Statistical Verification* | *Generated Spectrogram & Predicted Label* |
 
 > **Note:** 최종 단계에서 생성된 Q-scan 이미지는 `results/qscan/` 폴더에서 확인할 수 있으며, AI 모델의 예측 결과는 CSV 파일로 저장됩니다.
