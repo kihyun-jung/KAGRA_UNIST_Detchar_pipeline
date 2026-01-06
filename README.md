@@ -175,9 +175,9 @@ python run_coherence_pipeline.py
 |------|---|---|
 | Omicron | Trigger List (XML/CSV) | results/omicron/triggers.xml | 
 | Hveto | Veto Segments & Round Logs | results/hveto/veto_segments.txt | 
-| Coherence(Track B) | Coherence Plots | results/coherence/coherence_map.png | 
 | Q-scan(Track A) | Spectrogram Images | results/qscan/event_1234.png | 
 | ML Output(Track A) | Classification CSV | results/ml_output/predictions.csv |
+| Coherence(Track B) | Coherence Plots | results/coherence/coherence_map.png | 
 
 ---
 
