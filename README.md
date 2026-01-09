@@ -99,6 +99,10 @@ graph TD
 * 단일 프레임워크 종속성을 탈피하기 위해 **PyTorch**와 **TensorFlow** 두 가지 버전의 모델링 코드를 모두 구현 및 모듈화.
 * `--framework` 인자를 통해 실행 시점에 런타임 결정 가능.
 
+### 5. Legacy System Modernization & Runtime Patching
+* 레거시 분석 도구(Hveto)와 최신 과학 연산 라이브러리(Matplotlib 3.5+, GWpy, Uproot 5) 간의 **심각한 버전 호환성 문제(Dependency Conflict)**를 해결.
+* 라이브러리 소스 코드를 직접 수정하는 대신, 실행 시점에 동적으로 함수를 교체하는 **Runtime Monkey Patching** 기법을 적용하여 배포 무결성과 이식성(Portability)을 보장.
+    * *Major Fixes:* Empty segment handling logic, Matplotlib API changes adaptation, ROOT file I/O compatibility.
 ---
 
 ## 📂 Directory Structure
