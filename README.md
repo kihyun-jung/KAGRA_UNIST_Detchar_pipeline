@@ -105,7 +105,6 @@ graph TD
 * setup/ 스크립트를 통해 OS(Linux/Mac) 및 칩셋(Intel/Apple Silicon)을 감지하여 최적화된 환경을 자동 구축합니다.
 
 ### 2. Automated Pipeline Design
-* 하드코딩을 지양하고, 설정 파일(Config/Templates) 기반으로 경로와 파라미터를 제어하여 유지보수성 향상.
 * 각 단계의 입출력(I/O)이 명확히 정의되어 있어, 데이터 파이프라인의 **멱등성(Idempotency)** 보장.
 
 ### 3. Testing & Reproducibility (Mocking)
