@@ -273,7 +273,7 @@ ifo = K1
 ; Reason: Hveto statistically prefers higher thresholds (e.g., 100+).
 ; However, given the Mock Data distribution, a threshold of 100 resulted in 0 events vetoed (Efficiency 0%),
 ; leading to infinite loops. Capping at 50 ensures effective convergence.
-snr-thresholds = 8.00, 10.00, 15.00, 20.00, 30.00, 50.00
+; snr-thresholds = 8.00, 10.00, 15.00, 20.00, 30.00, 50.00, 100.00
 snr-thresholds = 8.00, 10.00, 15.00, 20.00, 30.00, 50.00
 time-windows = 0.10, 0.20, 0.40, 0.80, 1.00
 minimum-significance = 2.0
