@@ -89,7 +89,7 @@ graph TD
 
 | Category | Technologies |
 | :--- | :--- |
-| **Language** | Python 3.10+ |
+| **Language** | Python 3.8+ |
 | **Data Processing** | NumPy, Pandas, SciPy, **GWpy**, **Omicron**, **Hveto** (Time-series analysis), LALSuite |
 | **Deep Learning** | **PyTorch**, **TensorFlow/Keras**(Multi-backend support) |
 | **Orchestration** | **HTCondor** (Batch Job Scheduling), Shell Scripting |
@@ -162,9 +162,11 @@ KAGRA-UNIST_Detchar_pipeline/
 python setup/install_igwn_env.py
 ```
 ### 2. Machine Learning Environment (ml)
+이 파이프라인은 macOS (Intel 및 Apple Silicon) 와 Linux 환경을 모두 지원합니다. 포함된 설치 스크립트(install_ml_env.py)는 현재 시스템의 아키텍처를 자동으로 감지하여, 각 환경에 최적화된 TensorFlow 및 라이브러리를 설치합니다.
 ```bash
 python setup/install_ml_env.py
 ```
+> **Apple Silicon (M1/M2/M3) 사용자 참고:** 설치 스크립트는 **Rosetta(x86)** 환경에서 실행되더라도 이를 자동으로 감지합니다. 강제로 **ARM64 (Native)** 기반 환경을 구성하여 tensorflow-metal 가속 기능을 활성화하므로, 터미널 설정 변경 없이 그대로 실행하시면 됩니다.
 
 ## Phase 1: Data Generation & Pre-processing
 물리 분석 환경(igwn)을 활성화한 후 실행합니다.
@@ -197,17 +199,21 @@ Q-scan 이미지를 생성하고 딥러닝 모델로 분류합니다.
 
 #### Step 4: Generate Q-scans (Still in igwn env)
 ```bash
-python scripts/04_generate_qscan.py -y 2023 -m 1 -d 1
+python scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
 ```
 
 #### Step 6: Run ML Pipeline (Switch to ML env!)
+반드시 머신러닝 환경을 활성화하여야 합니다.
 ```bash
 source ./activate_ml_env.sh
-python scripts/06_run_ml_pipeline.py -y 2023 -m 1 -d 1 --framework pytorch
+```
+프레임워크를 인자로 두어 실행하도록 하였습니다. 원하는 것을 선택하여 할 수도, 두가지 모두를 돌려 비교를 해 볼 수 있습니다.
+```bash
+python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework pytorch
 ```
 or
 ```bash
-python scripts/06_run_ml_pipeline.py -y 2023 -m 1 -d 1 --framework tensorflow
+python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
 
 ### Track B: Physical Analysis
@@ -216,8 +222,12 @@ python scripts/06_run_ml_pipeline.py -y 2023 -m 1 -d 1 --framework tensorflow
 source ./activate_igwn_env.sh
 ```
 #### Step 5: Coherence Calculation
+시간 가중 (Time-weighted) 평균 코히어런스 계산
 ```bash
 python scripts/05_a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
+```
+SNR 가중 (SNR-weighted) 평균 코히어런스 계산
+```bash
 python scripts/05_b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
 ```
 
