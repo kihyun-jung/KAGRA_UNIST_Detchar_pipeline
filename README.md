@@ -217,7 +217,7 @@ python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
 
 ### Track B: Physical Analysis
-보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 숫자를 쓰면 됩니다. Round winner의 등수가 높을수록 veto가 많이 된 것 입니다.
+보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 숫자를 쓰면 됩니다. Round winner의 등수가 높을수록 유의도(Significance)가 높은 채널입니다.
 ```bash
 source ./activate_igwn_env.sh
 ```
