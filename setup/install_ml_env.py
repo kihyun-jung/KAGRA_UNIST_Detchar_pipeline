@@ -15,10 +15,39 @@ ENV_PREFIX = os.path.join(BASE_DIR, "ml_env")
 MAMBA_ROOT = os.path.join(BASE_DIR, ".micromamba")
 ENV_FILE = os.path.join(SCRIPT_DIR, "ml_environment.yml")
 
+def is_apple_silicon_check():
+    """
+    단순 platform.machine() 확인이 아니라, 
+    Rosetta 뒤에 숨은 실제 하드웨어가 Apple Silicon인지 확인합니다.
+    """
+    system = platform.system().lower()
+    machine = platform.machine().lower()
+
+    if system != "darwin":
+        return False
+
+    # 1. 네이티브 ARM 모드인 경우
+    if "arm" in machine or "aarch64" in machine:
+        return True
+
+    # 2. x86_64로 뜨지만 실제로는 Rosetta로 돌고 있는 M1/M2/M3인 경우
+    try:
+        # sysctl 명령어로 번역(Rosetta) 여부 확인
+        # sysctl.proc_translated가 1이면 Rosetta 환경임 -> 즉, 실제는 Apple Silicon
+        result = subprocess.run(["sysctl", "-n", "sysctl.proc_translated"], 
+                                capture_output=True, text=True)
+        if result.stdout.strip() == "1":
+            print("[!] Detected Apple Silicon running under Rosetta (x86_64 emulation).")
+            print("    -> Forcing Native ARM64 installation for performance.")
+            return True
+    except Exception:
+        pass
+
+    return False
+
 def get_system_config():
-    """OS와 아키텍처를 감지하여 설정값을 반환 (Windows 미지원)"""
-    system = platform.system().lower()   # 'darwin', 'linux'
-    machine = platform.machine().lower() # 'arm64', 'x86_64' etc
+    """OS와 아키텍처를 감지하여 설정값을 반환"""
+    system = platform.system().lower()
     
     config = {
         "system": system,
@@ -29,13 +58,12 @@ def get_system_config():
 
     # 1. macOS (Darwin)
     if system == "darwin":
-        # Apple Silicon 감지
-        if "arm" in machine or "aarch64" in machine:
+        if is_apple_silicon_check():
             config["is_apple_silicon"] = True
             config["target_platform"] = "osx-arm64"
-            mm_arch = "64" # Micromamba 바이너리는 Universal 호환
+            mm_arch = "64" # Micromamba 바이너리 다운로드용 (범용)
         else:
-            # Intel Mac
+            # 찐 Intel Mac
             config["is_apple_silicon"] = False
             config["target_platform"] = "osx-64"
             mm_arch = "64"
@@ -44,6 +72,7 @@ def get_system_config():
 
     # 2. Linux
     elif system == "linux":
+        machine = platform.machine().lower()
         config["is_apple_silicon"] = False
         config["target_platform"] = "linux-64"
         mm_arch = "aarch64" if "aarch64" in machine else "64"
@@ -51,23 +80,20 @@ def get_system_config():
 
     else:
         print(f"[!] Unsupported OS: {system}")
-        print("    This pipeline supports macOS (Intel/Silicon) and Linux only.")
+        print("    This pipeline supports macOS (Intel/Silicon) and Linux.")
         sys.exit(1)
         
     return config
 
 def setup_micromamba(url):
-    """Micromamba 자동 다운로드 및 설치"""
     mamba_exe = os.path.join(MAMBA_ROOT, "micromamba")
     if os.path.exists(mamba_exe):
         return mamba_exe
 
     print(f"[*] Downloading Micromamba...")
-    print(f"    URL: {url}")
     os.makedirs(MAMBA_ROOT, exist_ok=True)
     
     tar_path = os.path.join(MAMBA_ROOT, "mm.tar.bz2")
-    
     try:
         urllib.request.urlretrieve(url, tar_path)
         with tarfile.open(tar_path, "r:bz2") as tar:
@@ -83,7 +109,7 @@ def setup_micromamba(url):
         sys.exit(1)
 
 def generate_env_yaml(config):
-    print(f"[*] Generating YAML for {config['target_platform']} (Apple Silicon: {config['is_apple_silicon']})...")
+    print(f"[*] Generating YAML for {config['target_platform']}...")
 
     base_deps = """
 name: ml_env
@@ -105,10 +131,10 @@ dependencies:
   - torchvision
 """
 
-    # [핵심] 아키텍처에 따른 TensorFlow 의존성 분기
     if config["is_apple_silicon"]:
-        # Mac M1/M2/M3용 (Metal 가속 포함)
+        # Mac M1/M2/M3 (nomkl 추가하여 인텔 라이브러리 배제)
         tf_deps = """
+  - nomkl
   - pip:
     - hveto
     - gwpy
@@ -116,7 +142,7 @@ dependencies:
     - tensorflow-metal
 """
     else:
-        # Intel Mac & Linux용 (일반 TensorFlow)
+        # Intel Mac & Linux
         tf_deps = """
   - pip:
     - hveto
@@ -131,7 +157,7 @@ dependencies:
     print(f"Created {ENV_FILE}")
 
 def main():
-    # 1. 시스템 감지
+    # 1. 스마트 시스템 감지 (Rosetta 관통)
     config = get_system_config()
     
     # 2. Micromamba 준비
@@ -150,11 +176,16 @@ def main():
         "-r", MAMBA_ROOT,
         "-f", ENV_FILE,
         "-c", "conda-forge", "--yes",
-        "--platform", config["target_platform"]
+        "--platform", config["target_platform"] # 플랫폼 강제 지정이 핵심
     ]
 
     try:
-        subprocess.run(cmd, check=True)
+        # 환경 변수에도 플랫폼 강제 주입 (Rosetta 무력화)
+        env = os.environ.copy()
+        if config["target_platform"]:
+            env["CONDA_SUBDIR"] = config["target_platform"]
+            
+        subprocess.run(cmd, check=True, env=env)
     except subprocess.CalledProcessError as e:
         print(f"\n Error Occured: Installation (Exit code: {e.returncode})")
         sys.exit(1)
@@ -163,7 +194,7 @@ def main():
     activate_script = os.path.join(BASE_DIR, "activate_ml_env.sh")
     with open(activate_script, "w") as f:
         f.write("#!/bin/bash\n")
-        # macOS의 경우 크로스 컴파일 방지를 위해 SUBDIR 명시
+        # 활성화 시에도 아키텍처 고정
         if config["system"] == "darwin":
              f.write(f"export CONDA_SUBDIR={config['target_platform']}\n")
         
