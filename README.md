@@ -43,7 +43,7 @@ graph TD
 * **Tech:** Python, NumPy (Signal Injection), GWpy, Omicron (Wavelet Transform).
 * **Process:**
     * 1. Phase-locking: 메인 채널과 보조 채널 간의 위상을 동기화하여 물리적 인과관계를 모사.
-    * 2. Noise Injection: Gaussian Noise에 신호를 주입하여 현실적인 데이터(Mock .gwf) 생성.
+    * 2. Noise Injection: Gaussian Noise에 신호를 주입하여 가상 데이터(Mock .gwf) 생성.
     * 3. Triggering: 생성된 데이터에서 SNR 6.0 이상의 이벤트를 검출.
 * **Scalability:** 파일 리스트(FFL) 자동 생성 및 배치 처리를 통한 대용량 데이터 대응. 32초 단위 청크(Chunk) 생성 방식으로 메모리 오버헤드 없이 장기간(일/월 단위) 데이터 생성 가능.
 * **Output:** Raw Data (.gwf), Trigger List (.root or .xml).
