@@ -11,9 +11,9 @@
 
 본 프로젝트는 대규모 시계열 데이터(KAGRA Gravitational Wave Data)에서 발생하는 비정상 신호(Anomaly/Glitch)를 탐지하고 원인을 규명하는 자동화 파이프라인입니다.
 
-Mock Data Generator를 통해 물리적 특성이 반영된 가상 데이터를 생성하고, **Omicron(Triggering) → Hveto(Correlation) → Deep Learning(Classification)**으로 이어지는 전체 분석 과정을 로컬 환경에서 재현할 수 있도록 구축되었습니다. 이후 분석 목적에 따라 **AI 기반 분류(Deep Learning)**와 **선형 결합도 분석(Coherence)**의 두 가지 독립적인 경로로 분기되는 유연한 아키텍처를 가집니다.
+Mock Data Generator를 통해 물리적 특성이 반영된 가상 데이터를 생성하고, Omicron(Triggering) → Hveto(Correlation) → Deep Learning(Classification)으로 이어지는 전체 분석 과정을 로컬 환경에서 재현할 수 있도록 구축되었습니다. 이후 분석 목적에 따라 AI 기반 분류(Deep Learning)와 선형 결합도 분석(Coherence)의 두 가지 독립적인 경로로 분기되는 유연한 아키텍처를 가집니다.
 
-연구 데이터 보안 문제와 대규모 클러스터(HTCondor) 의존성을 탈피하여, 어디서든 실행 가능한(Portable) 포트폴리오용 아키텍처로 재설계되었습니다.
+연구 데이터 보안 문제와 대규모 클러스터(HTCondor) 의존성을 탈피하여, 어디서든 실행 가능한 포트폴리오용 아키텍처로 재설계되었습니다.
 
 > **Key Point:** 본 레포지토리는 KISTI 슈퍼컴퓨팅 환경의 대규모 병렬 처리로도 실행 가능합니다.
 
@@ -21,7 +21,7 @@ Mock Data Generator를 통해 물리적 특성이 반영된 가상 데이터를 
 
 ## System Architecture
 
-전체 시스템은 **데이터 생성 및 전처리(Common Phase)**와 목적에 따라 나뉘는 **두 개의 분석 트랙(Dual Analysis Tracks)**으로 구성됩니다.
+전체 시스템은 데이터 생성 및 전처리(Common Phase)와 목적에 따라 나뉘는 두 개의 분석 트랙으로 구성됩니다.
 
 ```mermaid
 graph TD
@@ -46,7 +46,7 @@ graph TD
     * 2. Noise Injection: Gaussian Noise에 신호를 주입하여 현실적인 데이터(Mock .gwf) 생성.
     * 3. Triggering: 생성된 데이터에서 SNR 6.0 이상의 이벤트를 검출.
 * **Scalability:** 파일 리스트(FFL) 자동 생성 및 배치 처리를 통한 대용량 데이터 대응. 32초 단위 청크(Chunk) 생성 방식으로 메모리 오버헤드 없이 장기간(일/월 단위) 데이터 생성 가능.
-* **Output:** Raw Data (.gwf), Trigger List (.xml).
+* **Output:** Raw Data (.gwf), Trigger List (.root or .xml).
 
 #### 2. Statistical Correlation Analysis (Root Cause Analysis)
 * **Role:** (Core Step) 탐지된 신호가 시간-주파수 상에서 통계적으로 유사한 지 1차 검증하고, 의심되는 보조 채널(Auxiliary Channels) 리스트를 추출합니다. 이 결과는 이후 모든 분석의 기준이 됩니다.
@@ -54,7 +54,7 @@ graph TD
 * **Process:** 수백 개의 보조 채널(Aux Channels)과의 상관관계를 분석하여 노이즈/글리치 신호를 관련 보조 채널, 주파수, 시간 정보를 총 정리합니다.
     * 1. Dynamic Patching: 레거시 라이브러리의 호환성 문제를 해결하기 위해 실행 시점에 코드를 동적으로 수정.
     * 2. Round-Robin Analysis: 가장 상관성이 높은 채널부터 순차적으로 제거(Veto)하며 원인을 규명.
-* **Output:** Vetoed Segments List, Winner Channel Info (.txt, .html).
+* **Output:** Vetoed Segments List, Winner Channel Info (log file, .png, .txt, .html).
 
 ### Track A: AI-Driven Classification (MLOps Path)
 #### 3-A. Feature Engineering (Q-transform)
@@ -71,15 +71,15 @@ graph TD
     * 1. Training: data/training_set을 이용한 지도 학습(Supervised Learning).
     * 2. Inference: 새로운 Q-scan 이미지에 대한 배치 추론.
 * **Feature:** 학습(Train)과 추론(Inference) 파이프라인의 자동화, 다중 프레임워크 지원.
-* **Output:** Prediction CSV (Class & Probability), Accuracy/Loss Graphs.
+* **Output:** Prediction CSV (Class & Probability), Accuracy/Loss Graphs, 분류 결과 폴더
 
 ### Track B: Physical Coherence Analysis (Physics Path)
 #### 3-B. Deep Learning Classification (Model Serving)
-* **Role:** 통계적 상관관계(Hveto)를 넘어, 신호 간의 **선형 결합도(Linear Coupling)**를 정량적으로 검증합니다.
+* **Role:** 통계적 상관관계(Hveto)를 넘어, 신호 간의 선형 결합도(Linear Coupling)를 정량적으로 검증합니다.
 * **Tech:** FFT (Fast Fourier Transform), Welch's Method, SNR-weighted Averaging.
 * **Process:** 단순 시간 일치를 넘어 주파수 영역(Frequency Domain)에서의 전체적인 기간 평균과 글리치 순간의 평균 정량적 인과관계를 규명합니다.
     * **Overall Coherence:** 장시간 평균을 계산하여 상시 잡음(Stationary Noise)의 영향을 확인.
-    * **Glitch Coherence:** 글리치 발생 순간(0.5s)에 SNR 가중치를 두어 **희석 효과(Dilution Effect)**를 최소화하고 실제 인과관계를 증명.
+    * **Glitch Coherence:** 글리치 발생 순간(0.5s)에 SNR 가중치를 두어 희석 효과(Dilution Effect)를 최소화하고 실제 인과관계를 증명.
 * **Output:** 주파수 대역별 결합도를 시각화한 Overall, Glitch Coherence Graph(.png).
 * **(Optional)** Targeted Q-scan: Overall, Glitch Coherence가 모두 낮게 나타난 특정 채널에 대해 추가적인 시각화 분석이 필요한 경우 Q-spectrogram 분석이 필요합니다.
 
@@ -116,7 +116,7 @@ graph TD
 * `--framework` 인자를 통해 실행 시점에 런타임 결정 가능.
 
 ### 5. Legacy System Modernization & Runtime Patching
-* 레거시 분석 도구(Hveto)와 최신 과학 연산 라이브러리(Matplotlib 3.5+, GWpy, Uproot 5) 간의 **심각한 버전 호환성 문제(Dependency Conflict)**를 해결.
+* 레거시 분석 도구(Hveto)와 최신 과학 연산 라이브러리(Matplotlib 3.5+, GWpy, Uproot 5) 간의 심각한 버전 호환성 문제(Dependency Conflict)를 해결.
 * 라이브러리 소스 코드를 직접 수정하는 대신, 실행 시점에 동적으로 함수를 교체하는 **Runtime Monkey Patching** 기법을 적용하여 배포 무결성과 이식성(Portability)을 보장.
     * *Major Fixes:* Empty segment handling logic, Matplotlib API changes adaptation, ROOT file I/O compatibility.
 ---
@@ -216,7 +216,7 @@ python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
 
 ### Track B: Physical Analysis
-보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 rank를 쓰면 됩니다. Round winner의 rank가 높을수록 유의도(Significance)가 높은 채널입니다.
+보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 rank를 입력합니다. Round winner의 rank가 높을수록 유의도(Significance)가 높은 채널입니다.
 ```bash
 source ./activate_igwn_env.sh
 ```
