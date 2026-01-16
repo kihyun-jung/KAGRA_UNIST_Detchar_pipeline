@@ -245,7 +245,7 @@ python scripts/05_b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
 
 ---
 
-**Author:** Kihyun Jung
-**Contact:** khjung@unist.ac.kr or wjk9364@gmail.com
+**Author:** Kihyun Jung<br>
+**Contact:** khjung@unist.ac.kr or wjk9364@gmail.com<br>
 **Institution:** UNIST (Ulsan National Institute of Science and Technology)
 
