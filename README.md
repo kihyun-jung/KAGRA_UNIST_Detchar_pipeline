@@ -223,11 +223,11 @@ source ./activate_igwn_env.sh
 #### Step 5: Coherence Calculation
 시간 가중 (Time-weighted) 평균 코히어런스 계산
 ```bash
-python scripts/05_a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
+python scripts/05-a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
 ```
 SNR 가중 (SNR-weighted) 평균 코히어런스 계산
 ```bash
-python scripts/05_b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
+python scripts/05-b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
 ```
 
 ## Pipeline Execution Results (Preview)
