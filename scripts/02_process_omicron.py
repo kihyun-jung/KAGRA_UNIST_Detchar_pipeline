@@ -78,7 +78,7 @@ PARAMETER CLUSTERDT 0.1
 //** output configuration
 OUTPUT DIRECTORY {output_dir.resolve()}
 OUTPUT PRODUCTS triggers
-OUTPUT FORMAT xml
+OUTPUT FORMAT root
 OUTPUT VERBOSITY 0
 
 //** data configuration
