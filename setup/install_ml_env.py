@@ -63,7 +63,7 @@ def get_system_config():
             config["target_platform"] = "osx-arm64"
             mm_arch = "64" # Micromamba 바이너리 다운로드용 (범용)
         else:
-            # 찐 Intel Mac
+            # Intel Mac
             config["is_apple_silicon"] = False
             config["target_platform"] = "osx-64"
             mm_arch = "64"
@@ -140,6 +140,7 @@ dependencies:
     - gwpy
     - tensorflow-macos
     - tensorflow-metal
+    - optree
 """
     else:
         # Intel Mac & Linux
@@ -148,6 +149,7 @@ dependencies:
     - hveto
     - gwpy
     - tensorflow
+    - optree
 """
 
     full_yaml = base_deps.strip() + tf_deps.rstrip()
