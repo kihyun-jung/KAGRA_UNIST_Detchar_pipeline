@@ -214,7 +214,11 @@ python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 #### (NOTE) In a TensorFlow, dependency tangle errors involving optree may occur. If the error message displays "pip install optree", enter `./ml_env/bin/python3 -m pip install --force-reinstall --no-cache-dir optree typing-extensions`, then enter `./ml_env/bin/python3 -c "import optree; import tensorflow; from tensorflow.keras import layers; print('-> SUCCESS')"`. Please execute the command after "SUCCESS" is displayed.
 
 ### Track B: Physical Analysis
-Switch back to igwn env and calculate coherence for specific ranks:
+Precisely analyze the correlation with the auxiliary channel. (Back to the igwn environment) At this point, enter the rank of the round winner channel from the hveto result into the -r argument. The higher the rank of the round winner, the higher the significance of the channel. You must enable the igwn environment. If the machine learning environment is currently enabled, disable it.
+```bash
+micromamba deactivate
+```
+Next, activate the igwn environment.
 ```bash
 source ./activate_igwn_env.sh
 ```
