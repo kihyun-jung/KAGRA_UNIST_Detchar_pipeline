@@ -195,6 +195,11 @@ python3 scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
 ```
 
 #### Step 6: Run ML Pipeline (Switch to ML env!)
+You must activate the machine learning environment. First, deactivate the existing igwn environment.
+```bash
+micromamba deactivate
+```
+Next, activate the machine learning environment.
 ```bash
 source ./activate_ml_env.sh
 ```
@@ -206,6 +211,7 @@ or
 ```bash
 python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
+#### (NOTE) In a TensorFlow, dependency tangle errors involving optree may occur. If the error message displays "pip install optree", enter `./ml_env/bin/python3 -m pip install --force-reinstall --no-cache-dir optree typing-extensions`, then enter `./ml_env/bin/python3 -c "import optree; import tensorflow; from tensorflow.keras import layers; print('-> SUCCESS')"`. Please execute the command after "SUCCESS" is displayed.
 
 ### Track B: Physical Analysis
 Switch back to igwn env and calculate coherence for specific ranks:
