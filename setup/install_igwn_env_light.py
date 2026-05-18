@@ -85,7 +85,7 @@ def main():
         f.write(f'SCRIPT_DIR="$(cd "$(dirname "${{BASH_SOURCE[0]}}")" && pwd)"\n')
         f.write(f'eval "$("$SCRIPT_DIR/.micromamba/micromamba" shell hook --shell bash)"\n')
         f.write(f'micromamba activate "$SCRIPT_DIR/python_env"\n')
-        f.write('echo "Local Lightweight IGWN & ML Environment Activated!"\n')
+        f.write('echo "Local IGWN Environment Activated!"\n')
     
     os.chmod(activate_script, 0o755)
     
