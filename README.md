@@ -158,12 +158,12 @@ KAGRA-UNIST_Detchar_pipeline/
 ## Phase 0: Environment Setup
 ### 1. GW Analysis Environment (igwn)
 ```bash
-python setup/install_igwn_env.py
+python3 setup/install_igwn_env.py
 ```
 ### 2. Machine Learning Environment (ml)
 이 파이프라인은 macOS (Intel 및 Apple Silicon) 와 Linux 환경을 모두 지원합니다. 포함된 설치 스크립트(install_ml_env.py)는 현재 시스템의 아키텍처를 자동으로 감지하여, 각 환경에 최적화된 TensorFlow 및 라이브러리를 설치합니다.
 ```bash
-python setup/install_ml_env.py
+python3 setup/install_ml_env.py
 ```
 > **Apple Silicon (M1/M2/M3) 사용자 참고:** 설치 스크립트는 **Rosetta(x86)** 환경에서 실행되더라도 이를 자동으로 감지합니다. 강제로 **ARM64 (Native)** 기반 환경을 구성하여 tensorflow-metal 가속 기능을 활성화하므로, 터미널 설정 변경 없이 그대로 실행하시면 됩니다.
 
