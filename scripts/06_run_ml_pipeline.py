@@ -96,7 +96,7 @@ def main(args):
         
     elif framework == "tensorflow":
         train_cmd = [
-            "python", str(SRC_DIR / "train_tf.py"),
+            sys.executable, str(SRC_DIR / "train_tf.py"),
             "--data_dir", str(DATA_DIR),
             "--save_path", str(model_save_path),
             "--plot_path", str(plot_save_path),
