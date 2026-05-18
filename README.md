@@ -219,7 +219,8 @@ or
 ```bash
 python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
-#### (NOTE) Tensorflow 환경에서는 optree의 의존성 꼬임 에러가 발생할 수 있습니다. 에러 메세지에 pip install optree가 출력된다면, ./ml_env/bin/python3 -m pip install --force-reinstall --no-cache-dir optree typing-extensions 입력 후 ./ml_env/bin/python3 -c "import optree; import tensorflow; from tensorflow.keras import layers; print('-> SUCCESS')" 입력하시어 SUCCESS가 출력이 된 후 실행하십시오.
+#### (NOTE) Tensorflow 실행 시, optree의 의존성 꼬임 에러가 발생할 수 있습니다. 에러 메세지에 pip install optree가 출력된다면, ./ml_env/bin/python3 -m pip install --force-reinstall --no-cache-dir optree typing-extensions 입력 후 ./ml_env/bin/python3 -c "import optree; import tensorflow; from tensorflow.keras import layers; print('-> SUCCESS')" 입력하시어 SUCCESS가 출력이 된 후 실행하십시오.
+
 ### Track B: Physical Analysis
 보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 rank를 입력합니다. Round winner의 rank가 높을수록 유의도(Significance)가 높은 채널입니다.
 반드시 igwn 환경을 활성화하여야 합니다.
