@@ -228,7 +228,7 @@ python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```bash
 micromamba deactivate
 ```
-이후, 머신러닝 환경을 활성화 합니다.
+이후, igwn 환경을 활성화 합니다.
 ```bash
 source ./activate_igwn_env.sh
 ```
