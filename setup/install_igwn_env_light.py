@@ -59,12 +59,13 @@ def main():
     subdir = "osx-64" if system == "darwin" else "linux-64"
 
     print(f"\n [1/2] Creating isolated lightweight environment via Micromamba...")
+    
     cmd = [
         mamba_exe, "create", 
         "-p", ENV_PREFIX, 
         "-r", MAMBA_ROOT,
         "-c", "conda-forge", "-c", "igwn",
-        "python=3.10", "gwpy", "hveto", "pandas", 
+        "python=3.10", "gwpy", "hveto", "omicron", "pyomicron", "pandas", 
         "pillow", "tensorflow", "pytorch", "torchvision", 
         "--yes",
         "--platform", subdir
