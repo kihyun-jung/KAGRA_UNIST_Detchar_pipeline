@@ -152,12 +152,12 @@ KAGRA-UNIST_Detchar_pipeline/
 ## Phase 0: Environment Setup
 ### 1. GW Analysis Environment (igwn)
 ```bash
-python setup/install_igwn_env.py
+python3 setup/install_igwn_env.py
 ```
 ### 2. Machine Learning Environment (ml)
 The script automatically detects system architecture (Intel/Apple Silicon) and installs optimized TensorFlow/Metal.
 ```bash
-python setup/install_ml_env.py
+python3 setup/install_ml_env.py
 ```
 > **Note for Apple Silicon (M1/M2/M3) Users:** The installation script automatically detects if it is running under a **Rosetta (x86)** environment. It forcibly configures an **ARM64 (Native)** based environment to enable **tensorflow-metal** acceleration. You can run the script as-is without changing any terminal settings.
 
@@ -169,21 +169,21 @@ source ./activate_igwn_env.sh
 
 ### Step 1: Mock GWF Data Generation (e.g., 2026-01-01)
 ```bash
-python scripts/01_generate_mock.py -y 2026 -m 1 -d 1
+python3 scripts/01_generate_mock.py -y 2026 -m 1 -d 1
 ```
 #### (Optional) Customizing Data Duration: If you want to adjust the length of the generated data, add the `--duration [seconds]` option. The default duration is 14400 seconds (4 hours). For example, to generate data for an entire day (86400 seconds):
 ```bash
-python scripts/01_generate_mock.py -y 2026 -m 1 -d 1 --duration 86400
+python3 scripts/01_generate_mock.py -y 2026 -m 1 -d 1 --duration 86400
 ```
 
 ### Step 2: Omicron Trigger Generation
 ```bash
-python scripts/02_process_omicron.py -y 2026 -m 1 -d 1
+python3 scripts/02_process_omicron.py -y 2026 -m 1 -d 1
 ```
 
 ### Step 3: Hveto Analysis (Root Cause Analysis)
 ```bash
-python scripts/03_run_hveto.py -y 2026 -m 1 -d 1
+python3 scripts/03_run_hveto.py -y 2026 -m 1 -d 1
 ```
 
 ## Phase 2: Analysis Tracks
@@ -191,7 +191,7 @@ python scripts/03_run_hveto.py -y 2026 -m 1 -d 1
 
 #### Step 4: Generate Q-scans (Still in igwn env)
 ```bash
-python scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
+python3 scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
 ```
 
 #### Step 6: Run ML Pipeline (Switch to ML env!)
@@ -200,11 +200,11 @@ source ./activate_ml_env.sh
 ```
 The pipeline is designed to take the framework as an argument. You can choose your preferred framework or run both to compare their performance.
 ```bash
-python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework pytorch
+python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework pytorch
 ```
 or
 ```bash
-python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
+python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
 
 ### Track B: Physical Analysis
@@ -215,11 +215,11 @@ source ./activate_igwn_env.sh
 #### Step 5: Coherence Calculation
 Time-weighted average coherence
 ```bash
-python scripts/05-a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
+python3 scripts/05-a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
 ```
 SNR-weighted) average coherence
 ```bash
-python scripts/05-b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
+python3 scripts/05-b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
 ```
 
 ## Pipeline Execution Results (Preview)
