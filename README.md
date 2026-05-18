@@ -175,21 +175,21 @@ source ./activate_igwn_env.sh
 
 ### Step 1: Mock GWF Data Generation (e.g., 2026-01-01)
 ```bash
-python scripts/01_generate_mock.py -y 2026 -m 1 -d 1
+python3 scripts/01_generate_mock.py -y 2026 -m 1 -d 1
 ```
 #### (Optional) 만약 생성하고 싶은 데이터의 길이를 조절하고 싶다면 --duration [seconds] 옵션을 추가하세요. 기본 생성은 14400 (4시간) 입니다. 예를 들어, 하루짜리 데이터를 생성하고 싶다면,
 ```bash
-python scripts/01_generate_mock.py -y 2026 -m 1 -d 1 --duration 86400
+python3 scripts/01_generate_mock.py -y 2026 -m 1 -d 1 --duration 86400
 ```
 
 ### Step 2: Omicron Trigger Generation
 ```bash
-python scripts/02_process_omicron.py -y 2026 -m 1 -d 1
+python3 scripts/02_process_omicron.py -y 2026 -m 1 -d 1
 ```
 
 ### Step 3: Hveto Analysis (Root Cause Analysis)
 ```bash
-python scripts/03_run_hveto.py -y 2026 -m 1 -d 1
+python3 scripts/03_run_hveto.py -y 2026 -m 1 -d 1
 ```
 
 ## Phase 2: Analysis Tracks
@@ -198,7 +198,7 @@ Q-scan 이미지를 생성하고 딥러닝 모델로 분류합니다.
 
 #### Step 4: Generate Q-scans (Still in igwn env)
 ```bash
-python scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
+python3 scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
 ```
 
 #### Step 6: Run ML Pipeline (Switch to ML env!)
@@ -208,11 +208,11 @@ source ./activate_ml_env.sh
 ```
 프레임워크를 인자로 두어 실행하도록 하였습니다. 원하는 것을 선택하여 할 수도, 두가지 모두를 돌려 비교를 해 볼 수 있습니다.
 ```bash
-python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework pytorch
+python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework pytorch
 ```
 or
 ```bash
-python scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
+python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 ```
 
 ### Track B: Physical Analysis
@@ -223,11 +223,11 @@ source ./activate_igwn_env.sh
 #### Step 5: Coherence Calculation
 시간 가중 (Time-weighted) 평균 코히어런스 계산
 ```bash
-python scripts/05-a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
+python3 scripts/05-a_calc_coherence_overall.py -y 2026 -m 1 -d 1 -r 1
 ```
 SNR 가중 (SNR-weighted) 평균 코히어런스 계산
 ```bash
-python scripts/05-b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
+python3 scripts/05-b_calc_coherence_glitch.py -y 2026 -m 1 -d 1 -r 1
 ```
 
 ## Pipeline Execution Results (Preview)
