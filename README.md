@@ -203,6 +203,11 @@ python3 scripts/04_generate_qscan.py -y 2026 -m 1 -d 1
 
 #### Step 6: Run ML Pipeline (Switch to ML env!)
 반드시 머신러닝 환경을 활성화하여야 합니다.
+먼저, 기존 igwn 환경을 비활성화 합니다.
+```bash
+micromamba deactivate
+```
+이후, 머신러닝 환경을 활성화 합니다.
 ```bash
 source ./activate_ml_env.sh
 ```
@@ -217,6 +222,12 @@ python3 scripts/06_run_ml_pipeline.py -y 2026 -m 1 -d 1 --framework tensorflow
 
 ### Track B: Physical Analysis
 보조 채널과의 상관관계를 정밀 분석합니다. (다시 igwn 환경) 이때, -r 인자에는 hveto 결과로 나온 round winner 채널의 rank를 입력합니다. Round winner의 rank가 높을수록 유의도(Significance)가 높은 채널입니다.
+반드시 igwn 환경을 활성화하여야 합니다.
+만약 머신러닝 환경을 활성화 한 상태라면, 환경을 비활성화 합니다.
+```bash
+micromamba deactivate
+```
+이후, 머신러닝 환경을 활성화 합니다.
 ```bash
 source ./activate_igwn_env.sh
 ```
