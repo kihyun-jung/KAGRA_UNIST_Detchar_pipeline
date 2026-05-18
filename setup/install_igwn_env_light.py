@@ -66,7 +66,7 @@ def main():
         "-r", MAMBA_ROOT,
         "-c", "conda-forge", "-c", "igwn",
         "python=3.10", "gwpy", "hveto", "omicron", "pyomicron", "pandas", 
-        "pillow", "tensorflow", "pytorch", "torchvision", 
+        "uproot", "pillow", "tensorflow", "pytorch", "torchvision", 
         "--yes",
         "--platform", subdir
     ]
@@ -89,6 +89,12 @@ def main():
     
     os.chmod(activate_script, 0o755)
     
+    # hveto HTML 보고서 생성 버그 방지를 위한 가짜 conda(symlink) 생성
+    fake_conda = os.path.join(ENV_PREFIX, "bin", "conda")
+    if not os.path.exists(fake_conda):
+        print(" [*] Creating symlink for 'conda' -> 'micromamba' to prevent hveto HTML error...")
+        os.symlink(mamba_exe, fake_conda)
+        
     print(f"\n Setup Complete! Command: source ./activate_igwn_env.sh")
 
 if __name__ == "__main__":
