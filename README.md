@@ -23,7 +23,7 @@ Mock Data Generator를 통해 물리적 특성이 반영된 가상 데이터를 
 
 전체 시스템은 데이터 생성 및 전처리(Common Phase)와 목적에 따라 나뉘는 두 개의 분석 트랙으로 구성됩니다.
 
-![Data Pipeline](./src/mermaid-diagram-2026-09-02-013959.svg)
+![Data Pipeline](./src/mermaid-diagram.png)
 
 ### Common Modules (Pre-processing)
 #### 1. Mock Data & Trigger Generation (Data Ingestion)
