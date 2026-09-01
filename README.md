@@ -25,15 +25,13 @@ Mock Data Generator를 통해 물리적 특성이 반영된 가상 데이터를 
 
 ```mermaid
 flowchart TD
-    A["01. Mock Data Gen"] -->|Raw .gwf| B["02. Omicron Trigger Gen"]
-    B -->|Triggers| C{"03. Hveto Analysis"}
-
-    C -->|Track A: AI Classification| D["04. Q-scan Image Gen"]
+    A["01. Mock Data Gen"] -- Raw.gwf --> B["02. Omicron Trigger Gen"]
+    B -- Triggers --> C{"03. Hveto Analysis"}
+    C -- Track A (AI Classification) --> D["04. Q-scan Image Gen"]
     D --> E["06. ML Pipeline Runner"]
-    E --> F["ResNet/CNN Model"]
-    F --> G["Classification Result .csv"]
-
-    C -->|Track B: Physical Analysis| H["05. Coherence Calc"]
+    E --> F["ResNet / CNN Model"]
+    F --> G["Classification Result.csv"]
+    C -- Track B (Physical Analysis) --> H["05. Coherence Calc"]
     H --> I["Overall and Glitch Coherence Plots"]
 ```
 
